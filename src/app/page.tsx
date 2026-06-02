@@ -39,35 +39,18 @@ export default function Home() {
     setMounted(true);
   }, []);
 
-  // Intersection Observer to track scroll position and update dot navigation automatically
-  useEffect(() => {
-    if (!mounted) return;
-
-    const observerOptions = {
-      root: containerRef.current,
-      rootMargin: "0px",
-      threshold: 0.5 // Trigger when slide is 50% visible
-    };
-
-    const observerCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSlide(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    SLIDES.forEach((slide) => {
-      const el = document.getElementById(slide.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [mounted]);
+  const handleScroll = () => {
+    if (!containerRef.current) return;
+    const scrollTop = containerRef.current.scrollTop;
+    const slideHeight = containerRef.current.clientHeight || window.innerHeight;
+    const index = Math.round(scrollTop / slideHeight);
+    if (index >= 0 && index < SLIDES.length) {
+      const slideId = SLIDES[index].id;
+      if (activeSlide !== slideId) {
+        setActiveSlide(slideId);
+      }
+    }
+  };
 
   const scrollToSlide = (id: string) => {
     const el = document.getElementById(id);
@@ -115,7 +98,7 @@ export default function Home() {
       </nav>
 
       {/* Main Snap Scrolling Slide Container */}
-      <div className="slide-container" ref={containerRef}>
+      <div className="slide-container" ref={containerRef} onScroll={handleScroll}>
         
         {/* SLIDE 1: INTRODUCTION */}
         <section id="intro" className="slide">
@@ -751,26 +734,23 @@ export default function Home() {
             </div>
             <h2 className="title-medium">Advanced: Backend Overview</h2>
             <p className="subtitle-medium">
-              Take your static prototype and power it with a server database. In this self-guided section, you will learn to connect **Supabase** to store user information, emails, and forms.
+              Take your static prototype and power it with a server database. In this self-guided section, you will learn to connect <strong>Supabase</strong> to store user information, emails, and forms.
             </p>
 
             <div className="content-grid" style={{ gridTemplateColumns: "1.1fr 0.9fr" }}>
               <div className="glass-card">
                 <span className="card-num">What you will learn</span>
                 <h3 className="card-title">Backend Curriculum</h3>
-                <p className="card-text" style={{ lineHeight: "1.8" }}>
-                  • **The Power of Databases**: Server logic vs. client layouts.
-                  <br />
-                  • **Project Hosting**: Creating a Supabase workspace.
-                  <br />
-                  • **Relational DB Basics**: Managing rows and columns.
-                  <br />
-                  • **Local Connection**: Safe configuration of secret environment keys.
-                  <br />
-                  • **AI Copilot (MCP)**: Letting Antigravity query databases dynamically.
-                  <br />
-                  • **Table Queries**: Programming a live waitlist database collector.
-                </p>
+                <div className="card-text">
+                  <ul style={{ paddingLeft: "1.2rem", listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                    <li><strong>The Power of Databases</strong>: Server logic vs. client layouts.</li>
+                    <li><strong>Project Hosting</strong>: Creating a Supabase workspace.</li>
+                    <li><strong>Relational DB Basics</strong>: Managing rows and columns.</li>
+                    <li><strong>Local Connection</strong>: Safe configuration of secret environment keys.</li>
+                    <li><strong>AI Copilot (MCP)</strong>: Letting Antigravity query databases dynamically.</li>
+                    <li><strong>Table Queries</strong>: Programming a live waitlist database collector.</li>
+                  </ul>
+                </div>
               </div>
 
               <div className="glass-card" style={{ background: "rgba(16, 185, 129, 0.02)" }}>
@@ -867,7 +847,7 @@ export default function Home() {
                 <span className="card-num">Step 01</span>
                 <h3 className="card-title">Create Account</h3>
                 <p className="card-text">
-                  Visit Supabase and click **Sign Up** using your GitHub account for single-sign-on.
+                  Visit Supabase and click <strong>Sign Up</strong> using your GitHub account for single-sign-on.
                 </p>
                 <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", textDecoration: "none", marginTop: "auto" }}>
                   Go to Supabase ↗
@@ -876,9 +856,9 @@ export default function Home() {
 
               <div className="glass-card">
                 <span className="card-num">Step 02</span>
-                <h3 className="card-title">New Organization</h3>
+                <h3 className="card-title">New Project</h3>
                 <p className="card-text">
-                  In your account dashboard, click **New Project** and select or construct a free tier organization.
+                  In your account dashboard, click <strong>New Project</strong> and select or construct a free tier organization.
                 </p>
               </div>
 
@@ -886,7 +866,7 @@ export default function Home() {
                 <span className="card-num">Step 03</span>
                 <h3 className="card-title">Launch Database</h3>
                 <p className="card-text">
-                  Set a name (e.g. `website-waitlist`), input a secure Database Password, and select the region nearest to your customers. Click **Create**.
+                  Set a name (e.g. `website-waitlist`), input a secure Database Password, and select the region nearest to your customers. Click <strong>Create</strong>.
                 </p>
               </div>
 
@@ -921,13 +901,13 @@ export default function Home() {
                 <div className="glass-card">
                   <span className="card-num">Structure definitions</span>
                   <h3 className="card-title">Tables, Rows, & Columns</h3>
-                  <p className="card-text" style={{ fontSize: "0.9rem", lineHeight: "1.7" }}>
-                    • **Columns (Columns)**: Define fields (e.g. `id` as number, `email` as text, `created_at` as timestamp).
-                    <br />
-                    • **Rows (Rows)**: Single record entries (e.g. a signup entry by Jordan Scott).
-                    <br />
-                    • **APIs**: Bridge connecting your Next.js app to Supabase to fetch or insert rows using JSON objects.
-                  </p>
+                  <div className="card-text">
+                    <ul style={{ paddingLeft: "1.2rem", listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                      <li><strong>Columns</strong>: Define fields (e.g. <code>id</code> as number, <code>email</code> as text, <code>created_at</code> as timestamp).</li>
+                      <li><strong>Rows</strong>: Single record entries (e.g. a signup entry by Jordan Scott).</li>
+                      <li><strong>APIs</strong>: Bridge connecting your Next.js app to Supabase to fetch or insert rows using JSON objects.</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
@@ -1011,7 +991,7 @@ export default function Home() {
                 <div className="glass-card">
                   <span className="card-num">Credentials Syntax</span>
                   <p className="card-text">
-                    Add the credentials found under Supabase Settings &gt; **API**:
+                    Add the credentials found under Supabase Settings &gt; <strong>API</strong>:
                   </p>
                   <div className="code-block-container" style={{ flexDirection: "column", alignItems: "flex-start" }}>
                     <pre className="code-text" style={{ fontSize: "0.75rem", userSelect: "all", whiteSpace: "pre-wrap" }}>
@@ -1089,7 +1069,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
                 <span className="card-num">Developer Guardrails</span>
                 <h3 className="card-title">Maintain Code Literacy</h3>
                 <p className="card-text">
-                  Even though the MCP server delegates schema building to the AI, **always review the changes**. 
+                  Even though the MCP server delegates schema building to the AI, <strong>always review the changes</strong>. 
                   <br />
                   Make sure you understand table constraints, timestamps, and column types. If the AI inserts incorrect fields, a basic understanding of your tables will allow you to direct correction prompts.
                 </p>
@@ -1148,7 +1128,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
                   <br />
                   2. Input a test email (e.g. `test@startup.com`) into your new form and click submit.
                   <br />
-                  3. Go to your **Supabase Dashboard** &gt; **Table Editor** &gt; click the `waitlist` table.
+                  3. Go to your <strong>Supabase Dashboard</strong> &gt; <strong>Table Editor</strong> &gt; click the `waitlist` table.
                   <br />
                   4. Verify that the row containing `test@startup.com` appears instantly in the grid database view!
                 </p>
@@ -1239,7 +1219,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
                 <span className="card-num">Step 01</span>
                 <h3 className="card-title">Configure Environment Variables</h3>
                 <p className="card-text">
-                  Go to Vercel Dashboard &gt; select your project &gt; **Settings** &gt; **Environment Variables**.
+                  Go to Vercel Dashboard &gt; select your project &gt; <strong>Settings</strong> &gt; <strong>Environment Variables</strong>.
                 </p>
               </div>
 
@@ -1247,7 +1227,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
                 <span className="card-num">Step 02</span>
                 <h3 className="card-title">Add the keys</h3>
                 <p className="card-text">
-                  Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` as production variables matching their values in `.env.local`. Click **Save**.
+                  Add `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` as production variables matching their values in `.env.local`. Click <strong>Save</strong>.
                 </p>
               </div>
 
@@ -1268,7 +1248,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
             <div className="glass-card" style={{ marginTop: "1rem", background: "rgba(249, 115, 22, 0.02)", borderColor: "rgba(249, 115, 22, 0.15)" }}>
               <span className="card-num" style={{ color: "#f97316" }}>🔒 Security Checklist</span>
               <p className="card-text" style={{ fontSize: "0.9rem" }}>
-                Make sure you **never** commit secret service keys containing write/admin access (`SUPABASE_SERVICE_ROLE_KEY`) to GitHub. Only share the `ANON_KEY` publicly on client layouts. Enable Row Level Security (RLS) on Supabase table configurations.
+                Make sure you <strong>never</strong> commit secret service keys containing write/admin access (`SUPABASE_SERVICE_ROLE_KEY`) to GitHub. Only share the `ANON_KEY` publicly on client layouts. Enable Row Level Security (RLS) on Supabase table configurations.
               </p>
             </div>
           </div>
@@ -1298,15 +1278,14 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
               <div className="glass-card">
                 <span className="card-num">What you can build now</span>
                 <h3 className="card-title">Startup Idea Extensions</h3>
-                <p className="card-text" style={{ fontSize: "0.95rem", lineHeight: "1.8" }}>
-                  💡 **Blog CMS**: Fetch columns of post articles.
-                  <br />
-                  💡 **User Profiles**: Secure profiles and settings.
-                  <br />
-                  💡 **Feedback Boards**: Let visitors write feedback comments.
-                  <br />
-                  💡 **Checkout Forms**: Connect Stripe API hooks to database entries.
-                </p>
+                <div className="card-text">
+                  <ul style={{ paddingLeft: "1.2rem", listStyleType: "none", display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                    <li>💡 <strong>Blog CMS</strong>: Fetch columns of post articles.</li>
+                    <li>💡 <strong>User Profiles</strong>: Secure profiles and settings.</li>
+                    <li>💡 <strong>Feedback Boards</strong>: Let visitors write feedback comments.</li>
+                    <li>💡 <strong>Checkout Forms</strong>: Connect Stripe API hooks to database entries.</li>
+                  </ul>
+                </div>
               </div>
 
               <div className="glass-card">
