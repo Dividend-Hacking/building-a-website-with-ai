@@ -402,13 +402,12 @@ export default function Home() {
                   <h3 className="card-title">Applying to MVPs</h3>
                   <p className="card-text">
                     For entrepreneurship, map the wireframe:
-                    <br />
-                    • **Hero** → Value Proposition
-                    <br />
-                    • **Projects** → Products or Feature highlights
-                    <br />
-                    • **Contact** → Lead Capture waitlist
                   </p>
+                  <ul className="card-text" style={{ paddingLeft: "1.2rem", listStyleType: "disc", marginTop: "0.25rem" }}>
+                    <li><strong>Hero</strong> → Value Proposition</li>
+                    <li><strong>Projects</strong> → Products or Feature highlights</li>
+                    <li><strong>Contact</strong> → Lead Capture waitlist</li>
+                  </ul>
                 </div>
               </div>
 
@@ -587,7 +586,7 @@ export default function Home() {
                 <span className="card-num">Step 3</span>
                 <h3 className="card-title">Import & Deploy</h3>
                 <p className="card-text">
-                  Go to Vercel dashboard, click **Add New** &gt; **Project**. Link your GitHub account and import your repository. Click **Deploy**.
+                  Go to Vercel dashboard, click <strong>Add New</strong> &gt; <strong>Project</strong>. Link your GitHub account and import your repository. Click <strong>Deploy</strong>.
                 </p>
                 <div style={{ display: "flex", gap: "0.5rem", marginTop: "auto" }}>
                   <a href="https://vercel.com/new" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", textDecoration: "none", width: "100%" }}>
@@ -602,7 +601,7 @@ export default function Home() {
             <div className="glass-card" style={{ marginTop: "1rem", background: "rgba(239, 68, 68, 0.03)", borderColor: "rgba(239, 68, 68, 0.15)" }}>
               <span className="card-num" style={{ color: "#ef4444" }}>🚨 Pro-Tip: Debugging deployment failures</span>
               <p className="card-text" style={{ fontSize: "0.9rem" }}>
-                If Vercel reports a build error, copy the deployment log block, paste it into Antigravity, and type: **"Here is my Vercel build log error. Review the project and fix the code causing this."** The AI will locate the syntax issues and deploy again.
+                If Vercel reports a build error, copy the deployment log block, paste it into Antigravity, and type: <strong>"Here is my Vercel build log error. Review the project and fix the code causing this."</strong> The AI will locate the syntax issues and deploy again.
               </p>
             </div>
           </div>
