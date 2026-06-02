@@ -85,7 +85,7 @@ export default function Home() {
   return (
     <main style={{ position: "relative", width: "100vw", height: "100vh", overflow: "hidden" }}>
       {/* Floating Canvas Particle Field (drifts in background across all slides) */}
-      <ParticleBackground />
+      <ParticleBackground mode={activeSlide} />
 
       {/* Floating Vertical Navigation Dot Bar */}
       <nav className="dot-nav" aria-label="Slide Navigation">
