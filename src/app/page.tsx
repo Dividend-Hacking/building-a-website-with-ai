@@ -120,9 +120,6 @@ export default function Home() {
                 </svg>
               </button>
 
-              <div className="date-label animate-fade-in delay-2">
-                Q2 / June 2026
-              </div>
               <div className="presented-by animate-fade-in delay-2">
                 Presented by
               </div>
