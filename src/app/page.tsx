@@ -179,82 +179,99 @@ export default function Home() {
             </div>
 
             {/* Grid of Prerequisites */}
-            <div className="content-grid">
+            <div className="content-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
               
+              {/* ANTIGRAVITY CARD */}
+              <div className="glass-card">
+                <span className="card-num">01. Code Editor</span>
+                <h3 className="card-title">Antigravity</h3>
+                <p className="card-text">
+                  Your AI-powered coding editor. Open the application or install the extension to start pair programming with the assistant.
+                </p>
+                <div style={{ display: "flex", gap: "0.5rem", marginTop: "auto" }}>
+                  <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", minWidth: "auto", textDecoration: "none", width: "100%" }}>
+                    Download Editor ↗
+                  </a>
+                </div>
+              </div>
+
               {/* GIT CARD */}
               <div className="glass-card">
-                <span className="card-num">01. Version Control</span>
-                <h3 className="card-title">Git</h3>
+                <span className="card-num">02. Version Control</span>
+                <h3 className="card-title">Git Control</h3>
                 <p className="card-text">
-                  Tracks source code changes. Vital for linking projects to GitHub and automatic Vercel deployments.
+                  Tracks project files. Non-technical users should install <strong>GitHub Desktop</strong>, which configures Git and accounts automatically.
                 </p>
-                {activeOS === "mac" ? (
-                  <div>
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)" }}>Terminal Command:</span>
-                    <div className="code-block-container">
-                      <span className="code-text">brew install git</span>
-                      <button className="copy-btn" onClick={() => handleCopy("git_mac", "brew install git")}>
-                        {copyText["git_mac"] || "Copy"}
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)" }}>Powershell Command:</span>
-                    <div className="code-block-container">
-                      <span className="code-text">winget install Git.Git</span>
-                      <button className="copy-btn" onClick={() => handleCopy("git_win", "winget install Git.Git")}>
-                        {copyText["git_win"] || "Copy"}
-                      </button>
-                    </div>
-                  </div>
-                )}
-                <a href="https://git-scm.com" target="_blank" rel="noopener noreferrer" className="card-link">
-                  Official Git Site ↗
-                </a>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginTop: "auto" }}>
+                  <a href="https://desktop.github.com" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", minWidth: "auto", textDecoration: "none", background: "var(--text-primary)", color: "#000000", fontWeight: "600" }}>
+                    Get GitHub Desktop (Easy)
+                  </a>
+                  <a href="https://git-scm.com/downloads" target="_blank" rel="noopener noreferrer" className="card-link" style={{ fontSize: "0.85rem", alignSelf: "center" }}>
+                    Standalone Installer ↗
+                  </a>
+                  
+                  <details style={{ marginTop: "0.5rem", fontSize: "0.8rem", cursor: "pointer" }}>
+                    <summary style={{ color: "var(--text-tertiary)" }}>Developer CLI Option</summary>
+                    {activeOS === "mac" ? (
+                      <div className="code-block-container" style={{ padding: "0.5rem", marginTop: "0.25rem" }}>
+                        <span className="code-text" style={{ fontSize: "0.75rem" }}>brew install git</span>
+                        <button className="copy-btn" onClick={() => handleCopy("git_mac", "brew install git")} style={{ padding: "0.15rem 0.4rem", fontSize: "0.65rem" }}>
+                          {copyText["git_mac"] || "Copy"}
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="code-block-container" style={{ padding: "0.5rem", marginTop: "0.25rem" }}>
+                        <span className="code-text" style={{ fontSize: "0.75rem" }}>winget install Git.Git</span>
+                        <button className="copy-btn" onClick={() => handleCopy("git_win", "winget install Git.Git")} style={{ padding: "0.15rem 0.4rem", fontSize: "0.65rem" }}>
+                          {copyText["git_win"] || "Copy"}
+                        </button>
+                      </div>
+                    )}
+                  </details>
+                </div>
               </div>
 
               {/* NODE & NPM CARD */}
               <div className="glass-card">
-                <span className="card-num">02. Package Runtime</span>
+                <span className="card-num">03. App Compiler</span>
                 <h3 className="card-title">NodeJS & npm</h3>
                 <p className="card-text">
-                  Provides the environment to run Next.js and installs open-source libraries required for compiling apps.
+                  Runs Next.js websites and manages libraries. Install the <strong>LTS (Long Term Support)</strong> installer package.
                 </p>
-                {activeOS === "mac" ? (
-                  <div>
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)" }}>Terminal Command:</span>
-                    <div className="code-block-container">
-                      <span className="code-text">brew install node</span>
-                      <button className="copy-btn" onClick={() => handleCopy("node_mac", "brew install node")}>
-                        {copyText["node_mac"] || "Copy"}
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <span style={{ fontSize: "0.75rem", color: "var(--text-tertiary)" }}>Powershell Command:</span>
-                    <div className="code-block-container">
-                      <span className="code-text">winget install OpenJS.NodeJS</span>
-                      <button className="copy-btn" onClick={() => handleCopy("node_win", "winget install OpenJS.NodeJS")}>
-                        {copyText["node_win"] || "Copy"}
-                      </button>
-                    </div>
-                  </div>
-                )}
-                <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer" className="card-link">
-                  Official NodeJS Site ↗
-                </a>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginTop: "auto" }}>
+                  <a href="https://nodejs.org/en/download" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", minWidth: "auto", textDecoration: "none" }}>
+                    Download Node.js Installer
+                  </a>
+                  
+                  <details style={{ marginTop: "0.5rem", fontSize: "0.8rem", cursor: "pointer" }}>
+                    <summary style={{ color: "var(--text-tertiary)" }}>Developer CLI Option</summary>
+                    {activeOS === "mac" ? (
+                      <div className="code-block-container" style={{ padding: "0.5rem", marginTop: "0.25rem" }}>
+                        <span className="code-text" style={{ fontSize: "0.75rem" }}>brew install node</span>
+                        <button className="copy-btn" onClick={() => handleCopy("node_mac", "brew install node")} style={{ padding: "0.15rem 0.4rem", fontSize: "0.65rem" }}>
+                          {copyText["node_mac"] || "Copy"}
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="code-block-container" style={{ padding: "0.5rem", marginTop: "0.25rem" }}>
+                        <span className="code-text" style={{ fontSize: "0.75rem" }}>winget install OpenJS.NodeJS</span>
+                        <button className="copy-btn" onClick={() => handleCopy("node_win", "winget install OpenJS.NodeJS")} style={{ padding: "0.15rem 0.4rem", fontSize: "0.65rem" }}>
+                          {copyText["node_win"] || "Copy"}
+                        </button>
+                      </div>
+                    )}
+                  </details>
+                </div>
               </div>
 
               {/* ACCOUNT CREATION CARD */}
               <div className="glass-card">
-                <span className="card-num">03. Platforms</span>
+                <span className="card-num">04. Cloud Platforms</span>
                 <h3 className="card-title">GitHub & Vercel</h3>
                 <p className="card-text">
-                  Sign up for GitHub (code hosting) and Vercel (web hosting). Select Vercel's "Sign in with GitHub" to sync accounts instantly.
+                  Sign up for GitHub (code hosting) and Vercel (web hosting). Select Vercel's <strong>"Sign in with GitHub"</strong> to sync accounts instantly.
                 </p>
-                <div style={{ display: "flex", gap: "0.75rem", marginTop: "1rem" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginTop: "auto" }}>
                   <a href="https://github.com/signup" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.5rem 1rem", fontSize: "0.85rem", minWidth: "auto", textDecoration: "none" }}>
                     Create GitHub Account
                   </a>
