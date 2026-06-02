@@ -1058,10 +1058,15 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
                 <p className="card-text" style={{ lineHeight: "1.7" }}>
                   By configuring the Supabase MCP Server, Antigravity receives secure tools to inspect your database schema, insert tables, and configure triggers. 
                   <br />
-                  Instead of writing manual SQL scripts or navigating dashboard interfaces, you can speak directly in chat: *"Create a database schema to track user checkouts."*
+                  Instead of writing manual SQL scripts or navigating dashboard interfaces, you can speak directly in chat: <em>"Create a database schema to track user checkouts."</em>
                 </p>
-                <div className="mcp-pill-indicator" style={{ width: "fit-content", marginTop: "0.5rem" }}>
-                  ⚡ MCP Connected
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "auto", gap: "0.5rem", flexWrap: "wrap" }}>
+                  <div className="mcp-pill-indicator">
+                    ⚡ MCP Connected
+                  </div>
+                  <a href="https://github.com/supabase/mcp-server" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.4rem 0.85rem", fontSize: "0.8rem", minWidth: "auto", textDecoration: "none", margin: 0 }}>
+                    Supabase MCP Docs ↗
+                  </a>
                 </div>
               </div>
 
@@ -1073,6 +1078,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key`}
                   <br />
                   Make sure you understand table constraints, timestamps, and column types. If the AI inserts incorrect fields, a basic understanding of your tables will allow you to direct correction prompts.
                 </p>
+                <div style={{ marginTop: "auto" }}>
+                  <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer" className="pill" style={{ padding: "0.4rem 0.85rem", fontSize: "0.8rem", minWidth: "auto", textDecoration: "none", width: "100%" }}>
+                    Antigravity MCP Specs ↗
+                  </a>
+                </div>
               </div>
 
             </div>
